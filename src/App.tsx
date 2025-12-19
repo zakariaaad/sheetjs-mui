@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState, ChangeEvent } from "react";
+import { useCallback, useEffect, useState, ChangeEvent } from "react";
 import { DataGrid, GridColDef, GridRowModel } from "@mui/x-data-grid";
 import { read, utils, WorkSheet, writeFile } from "xlsx";
+import logo from './assets/icons8-excel.svg'
 
 import './App.css';
 
@@ -95,7 +96,8 @@ export default function App() {
 
   return (
     <>
-      <h3>SheetJS × MUI Data Grid Demo</h3>
+    <img src={logo} alt="Logo" />
+      <h3>Demo Import Excel file and view/edit data online</h3>
       <input type="file" onChange={handleFile} />
       {sheets.length > 0 && ( <>
         <p>Use the dropdown to switch to a worksheet:&nbsp;
@@ -104,12 +106,12 @@ export default function App() {
           </select>
         </p>
         <div className="flex-cont"><b>Current Sheet: {current}</b></div>
-        <div style={{width:"100%", height:400}}>
-          <DataGrid columns={columns} rows={rows} processRowUpdate={processRowUpdate} />
+        <div className="table" style={{width:"100%", height:400}}>
+          <DataGrid className="" columns={columns} rows={rows} processRowUpdate={processRowUpdate} />
         </div>
         <p>Click one of the buttons to create a new file with the modified data</p>
-        <div className="flex-cont">{["xlsx", "xlsb", "xls"].map((ext) => (
-          <button key={ext} onClick={() => saveFile(ext)}>export [.{ext}]</button>
+        <div className="flex-cont-btn">{["xlsx", "xlsb", "xls"].map((ext) => (
+          <button className="btn-excel" key={ext} onClick={() => saveFile(ext)}>export [.{ext}]</button>
         ))}</div>
       </> )}
     </>
